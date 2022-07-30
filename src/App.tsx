@@ -10,7 +10,7 @@ function App() {
   return (
       <React.Fragment>
         <CssBaseline />
-        <Container maxWidth="sm">
+        <Container sx={{ maxWidth:'80%'}} maxWidth={false}>
           <Box sx={{ height: '100vh' }}>
               <Verification/>
               <Comparison/>
