@@ -7,13 +7,19 @@ import Comparison from "./comparison/Comparison";
 import Verification from "./verification/Verification";
 
 function App() {
+
+  const [page, setPage] = React.useState<Number>(1);
+
   return (
       <React.Fragment>
         <CssBaseline />
-        <Container maxWidth="sm">
+        <Container sx={{ maxWidth:'80%'}} maxWidth={false}>
           <Box sx={{ height: '100vh' }}>
-              <Verification/>
-              <Comparison/>
+              {page === 1? 
+                <Verification onSubmitPressed={()=>{setPage(2)}}/> 
+                :
+                <Comparison/>
+              }
           </Box>
         </Container>
       </React.Fragment>
