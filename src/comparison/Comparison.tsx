@@ -14,7 +14,7 @@ import {
     Typography
 } from "@mui/material";
 import Box from "@mui/material/Box";
-import { blue, brown, green, red, yellow } from '@mui/material/colors';
+import { blue, brown, green, grey, red, yellow } from '@mui/material/colors';
 import Looks5OutlinedIcon from '@material-ui/icons/Looks5Outlined';
 import CameraAltOutlinedIcon from '@material-ui/icons/CameraAltOutlined';
 import RadioButton from '../components/RadioButton';
@@ -23,8 +23,8 @@ const DOOR_LOCK_TYPES = [
     {
         id: 1,
         name: 'Door Lock Model 1',
-        colors: [brown[800], red[800], blue[500]],
-        colorsNames: ['Brown', 'Red', 'Blue'],
+        colors: [brown[800], grey[300], yellow[500]],
+        colorsNames: ['Brown', 'Silver', 'Brass'],
         selectedColor: brown[800],
         price: 'A$1,699',
         quickLook: {
@@ -44,9 +44,9 @@ const DOOR_LOCK_TYPES = [
     {
         id: 2,
         name: 'Door Lock Model 2',
-        colors: [yellow[800], green[800], blue[500]],
-        colorsNames: ['Yellow', 'Green', 'Blue'],
-        selectedColor: yellow[800],
+        colors: [grey[100], brown[800]],
+        colorsNames: ['Silver', 'Brown'],
+        selectedColor: grey[100],
         price: 'A$2,199',
         quickLook: {
             displaySize: '6.7"',
@@ -65,9 +65,9 @@ const DOOR_LOCK_TYPES = [
     {
         id: 3,
         name: 'Door Lock Model 3',
-        colors: [green[800], red[800], blue[500]],
-        colorsNames: ['Green', 'Red', 'Blue'],
-        selectedColor: green[800],
+        colors: ['black', grey[300]],
+        colorsNames: ['Black', 'Nickel'],
+        selectedColor: 'black',
         price: 'A$1,499',
         quickLook: {
             displaySize: '5.1"',
@@ -88,7 +88,6 @@ const DOOR_LOCK_TYPES = [
 function Comparison() {
     const [itemOne, setItemOne] = React.useState<any>(DOOR_LOCK_TYPES[0]);
     const [itemTwo, setItemTwo] = React.useState<any>(DOOR_LOCK_TYPES[1]);
-    const [selectedValue, setSelectedValue] = React.useState('a');
     const [dropdownOneOptions, setDropdownOneOptions] = React.useState<any>([]);
     const [dropdownTwoOptions, setDropdownTwoOptions] = React.useState<any>([]);
 
@@ -111,6 +110,13 @@ function Comparison() {
             selectedColor: event.target.value
         });
     };
+
+    const getImageURL = (itemName: string, itemColor: string) => {
+        console.log("🚀 ~ file: Comparison.tsx ~ line 116 ~ getImageURL ~ itemColor", itemColor);
+        
+        const mapItemName = itemName.split(' ').join('_');
+        return `${mapItemName}_${itemColor}`;
+    }
 
     return (
         <Box sx={{ py: 10 }}>
@@ -153,7 +159,7 @@ function Comparison() {
                                 objectFit: 'contain'
                             }}
                             alt="The house from the offer."
-                            src={require("../assets/img/door-lock-1.jpg")}
+                            src={require(`../assets/img/${getImageURL(headerData.name, headerData.colorsNames[headerData.colors.findIndex((color: any)=> color == headerData.selectedColor)] )}.webp`)}
                         />
                     </Box>
                     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}} pb={5}>
@@ -219,7 +225,6 @@ function Comparison() {
                     </Box>
                 ))}
             </Box>
-
             <Box sx={{ fontSize: '30px', fontWeight: 'bold', m: 3, py: '20px', borderBottom: 1, borderColor: 'grey.300' }}> Splash, Water and Dust Resistance <span style={{ verticalAlign: 'super' }}>4</span> </Box>
             <Box display={'flex'}>
                 {[itemOne.durability, itemTwo.durability].map((durabilityText)=>(<Box sx={{ width: '50%', height: '100%', p: 1, mx: 3, textAlign: 'left' }}>
